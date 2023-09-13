@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /*
- * main - This is the main function here
+ * main - main function here
  *
  * Description: This program prints "_putchar" and returns 0.
  *
