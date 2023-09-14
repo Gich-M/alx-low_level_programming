@@ -12,7 +12,7 @@
 int _isupper(int c);
 {
 
-	if ((c >= 'A') && (c >= 'Z') || (c >= 'a') && (c >= 'z'))
+	if ((c >= '65') && (c >= '90') || (c >= '95') && (c >= '120'))
 		return (1);
 	else
 		return (0);
