@@ -1,11 +1,9 @@
 #include "main.h"
 
 /**
- * main - main function
- * @c:c - input parameter
- * int _isupper(int c) - checks for number
- *
- * Return: Always return 0.
+ * _isupper - function that checks for digit.
+ * @c: input parameter
+ * Return: 1 if c is digit, 0 otherwise
  */
 
 int _isdigit(int c)
@@ -14,4 +12,4 @@ int _isdigit(int c)
 		return (1);
 	else
 		return (0);
-}
+}i
