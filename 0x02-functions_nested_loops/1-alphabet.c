@@ -7,17 +7,9 @@
  */
 
 void print_alphabet(void) {
-	char a = 'a';
+	char ;
 	while(a <= 'z') {
-		_putchar(a);
-		a++;
+		_putchar(letter);
 	}
 }
-
-int main(void) {
-	print_alphabet;
-	_putchar('\n');
-	return (0);
-}
-
 
