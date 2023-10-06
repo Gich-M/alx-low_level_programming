@@ -3,9 +3,9 @@
 /**
  * malloc_checked - cause normal process termination with a status value of 98
  *
- * @b: allocated memory
+ * @b: size to allocate
  *
- * Return: a pointer to the allocated memory
+ * Return: returns the allocated memory
  */
 void *malloc_checked(unsigned int b)
 {
