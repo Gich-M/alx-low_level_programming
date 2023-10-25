@@ -18,7 +18,9 @@ int main(void)
 		number = number / 2;
 	}
 
-	for (long i = 3; i <= sqrt(number); i += 2)
+	long i;
+
+	for (i = 3; i <= sqrt(number); i += 2)
 	{
 		while (number % i == 0)
 		{
