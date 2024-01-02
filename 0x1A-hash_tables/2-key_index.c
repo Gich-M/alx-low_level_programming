@@ -2,7 +2,7 @@
 
 /**
  * key_index - function that gives the index of a key.
- * @key: key of an index
+ * @key: index of a key
  * @size: size of the array of the hash table.
  * Return: index at which the key/value pair should be stored
  * in the array of the hash table
