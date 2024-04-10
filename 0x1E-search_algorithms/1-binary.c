@@ -4,14 +4,15 @@
 /**
  * print_array - Prints an array of integers
  * @array: Pointer to the first element of the array
- * @size: Number of elements in the array
+ * @left: Starting index of the subarray
+ * @right: Ending index of the subarray
  */
-void print_array(int *array, size_t size)
+void print_array(int *array, size_t left, size_t right)
 {
 	size_t i;
 
 	printf("Searching in array: ");
-	for (i = 0; i < size; i++)
+	for (i = left; i <= right; i++)
 		printf("%d, ", array[i]);
 	printf("\n");
 }
@@ -33,7 +34,7 @@ int binary_search(int *array, size_t size, int value)
 	if (array == NULL)
 		return (-1);
 
-	print_array(array, size);
+	print_array(array, left, right);
 
 	while (left <= right)
 	{
@@ -45,7 +46,7 @@ int binary_search(int *array, size_t size, int value)
 		else
 			right = mid - 1;
 
-		print_array(array, size);
+		print_array(array, left, right);
 	}
 
 	return (-1);
