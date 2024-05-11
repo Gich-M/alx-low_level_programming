@@ -33,11 +33,14 @@ shash_table_t *shash_table_create(unsigned long int size)
 	for (i = 0; i < size; i++)
 		ht->array[i] = NULL;
 
+	ht->shead = NULL; /* Initialize shead and stail pointers */
+	ht->stail = NULL;
+
 	return (ht);
 }
 
 /**
- * shash_table_set - Adds an element to a soretd hash table
+ * shash_table_set - Adds an element to a sorted hash table
  * @ht: Pointer to the sorted hash table
  * @key: Key to add - Cannot be an empty string
  * @value: value associated with the key
@@ -50,7 +53,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	char *v_copy;
 	shash_node_t *new_node, *tmp;
 
-	if (ht == NULL || key == NULL || value == NULL)
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (-1);
 
 	v_copy = strdup(value);
@@ -67,7 +70,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			tmp->value = v_copy;
 			return (1);
 		}
-		tmp = tmp->next;
+		tmp = tmp->snext;
 	}
 
 	new_node = malloc(sizeof(shash_node_t));
@@ -104,7 +107,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	else
 	{
 		tmp = ht->shead;
-		while (tmp->snext && strcmp(tmp->snext->key, key) < 0)
+		while (tmp->snext != NULL && strcmp(tmp->snext->key, key) < 0)
 			tmp = tmp->snext;
 		new_node->sprev = tmp;
 		new_node->snext = tmp->snext;
@@ -127,7 +130,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
  * Return: NULL, if key not matched
  * Otherwise - the value associated with the key in ht.
  */
-
 char *shash_table_get(const shash_table_t *ht, const char *key)
 {
 	shash_node_t *node;
@@ -146,6 +148,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 	return ((node == NULL) ? NULL : node->value);
 }
+
 /**
  * shash_table_print - Prints the hash table in order
  * @ht: pointer to the hash table
@@ -217,4 +220,3 @@ void shash_table_delete(shash_table_t *ht)
 	free(head->array);
 	free(head);
 }
-
