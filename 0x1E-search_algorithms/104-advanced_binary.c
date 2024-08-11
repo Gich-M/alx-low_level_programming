@@ -1,53 +1,64 @@
 #include "search_algos.h"
 
 /**
- * print_array - Prints a subarray of an array of integers
- * @array: Pointer to the first element of the array
- * @left: Left index of the subarray
- * @right: Right index of the subarray
+ * rec_search - searches for a value in an array of
+ * integers using the Binary search algorithm
+ *
+ *
+ * @array: input array
+ * @size: size of the array
+ * @value: value to search in
+ * Return: index of the number
  */
-static void print_array(int *array, int left, int right)
+int rec_search(int *array, size_t size, int value)
 {
-	printf("Searching in array: ");
-	for (; left <= right; left++)
-	{
-		printf("%d", array[left]);
-		if (left != right)
-			printf(", ");
-	}
-	printf("\n");
-}
-
-/**
- * advanced_binary - Searches for the first occurrence of a value
- * in a sorted array of integers using advanced binary search
- * @array: Pointer to the first element of the array to search in
- * @size: Number of elements in array
- * @value: Value to search for
- * Return: Index where the value is found, or -1 if not found
- */
-int advanced_binary(int *array, size_t size, int value)
-{
-	int left = 0;
-	int right = size - 1;
+	size_t half = size / 2;
+	size_t i;
 
 	if (array == NULL || size == 0)
 		return (-1);
 
-	while (left <= right)
+	printf("Searching in array");
+
+	for (i = 0; i < size; i++)
+		printf("%s %d", (i == 0) ? ":" : ",", array[i]);
+
+	printf("\n");
+
+	if (half && size % 2 == 0)
+		half--;
+
+	if (value == array[half])
 	{
-		int mid = left + (right - left) / 2;
-
-		print_array(array, left, right);
-
-		if (array[mid] == value && (mid == 0 || array[mid - 1] != value))
-			return (mid);
-
-		if (array[mid] >= value)
-			right = mid - 1;
-		else
-			left = mid + 1;
+		if (half > 0)
+			return (rec_search(array, half + 1, value));
+		return ((int)half);
 	}
 
-	return (-1);
+	if (value < array[half])
+		return (rec_search(array, half + 1, value));
+
+	half++;
+	return (rec_search(array + half, size - half, value) + half);
+}
+
+/**
+ * advanced_binary - calls to rec_search to return
+ * the index of the number
+ *
+ * @array: input array
+ * @size: size of the array
+ * @value: value to search in
+ * Return: index of the number
+ */
+int advanced_binary(int *array, size_t size, int value)
+{
+	int index;
+
+	index = rec_search(array, size, value);
+
+	if (index >= 0 && array[index] != value)
+		return (-1);
+
+	return (index);
 }
